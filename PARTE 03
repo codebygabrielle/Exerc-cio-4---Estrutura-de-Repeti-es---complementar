@@ -1,0 +1,77 @@
+INÍCIO
+qtdA ← 0
+qtdB ← 0
+qtdC ← 0
+qtdD ← 0
+qtdE ← 0
+somaIdadeD ← 0
+maiorA ← 0
+maiorD ← 0
+maiorE ← 0
+i ← 1
+
+ENQUANTO (i <= 100) FAÇA
+    ESCREVER "Idade do espectador ", i
+    LER idade
+
+    ESCREVER "Nota (A/B/C/D/E):"
+    LER nota
+    ENQUANTO (nota != "A" E nota != "B" E nota != "C" E nota != "D" E nota != "E") FAÇA
+        ESCREVER "Nota inválida"
+        LER nota
+    FIM_ENQUANTO
+
+    SE (nota == "A") ENTÃO
+        qtdA ← qtdA + 1
+        SE (idade > maiorA) ENTÃO
+            maiorA ← idade
+        FIM_SE
+    SENÃO_SE (nota == "B") ENTÃO
+        qtdB ← qtdB + 1
+    SENÃO_SE (nota == "C") ENTÃO
+        qtdC ← qtdC + 1
+    SENÃO_SE (nota == "D") ENTÃO
+        qtdD ← qtdD + 1
+        somaIdadeD ← somaIdadeD + idade
+        SE (idade > maiorD) ENTÃO
+            maiorD ← idade
+        FIM_SE
+    SENÃO
+        qtdE ← qtdE + 1
+        SE (idade > maiorE) ENTÃO
+            maiorE ← idade
+        FIM_SE
+    FIM_SE
+
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "Respostas ótimo: ", qtdA
+
+SE (qtdB > qtdC) ENTÃO
+    difPerc ← ((qtdB - qtdC) / 100) * 100
+SENÃO
+    difPerc ← ((qtdC - qtdB) / 100) * 100
+FIM_SE
+ESCREVER "Diferença percentual entre bom e regular: ", difPerc, "%"
+
+SE (qtdD > 0) ENTÃO
+    mediaD ← somaIdadeD / qtdD
+    ESCREVER "Média de idade (ruim): ", mediaD
+SENÃO
+    ESCREVER "Ninguém respondeu ruim"
+FIM_SE
+
+percE ← (qtdE / 100) * 100
+ESCREVER "Percentual de péssimo: ", percE, "%"
+SE (qtdE > 0) ENTÃO
+    ESCREVER "Maior idade que respondeu péssimo: ", maiorE
+FIM_SE
+
+SE (maiorA > maiorD) ENTÃO
+    difIdade ← maiorA - maiorD
+SENÃO
+    difIdade ← maiorD - maiorA
+FIM_SE
+ESCREVER "Diferença entre maiores idades (ótimo x ruim): ", difIdade
+FIM

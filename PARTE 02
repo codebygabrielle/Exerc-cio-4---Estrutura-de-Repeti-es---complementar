@@ -1,0 +1,57 @@
+INÍCIO
+total ← 0
+qtd ← 0
+
+ESCREVER "Idade (-1 para encerrar):"
+LER idade
+
+ENQUANTO (idade != -1) FAÇA
+    SE (idade < 10 OU idade > 100) ENTÃO
+        ESCREVER "Idade inválida (10 a 100)"
+    SENÃO
+        ESCREVER "Sexo (m/f):"
+        LER sexo
+        ENQUANTO (sexo != "m" E sexo != "f") FAÇA
+            ESCREVER "Sexo inválido"
+            LER sexo
+        FIM_ENQUANTO
+
+        ESCREVER "Cor dos olhos (a/v/c/p):"
+        LER olhos
+        ENQUANTO (olhos != "a" E olhos != "v" E olhos != "c" E olhos != "p") FAÇA
+            ESCREVER "Cor dos olhos inválida"
+            LER olhos
+        FIM_ENQUANTO
+
+        ESCREVER "Cor dos cabelos (l/c/p/r):"
+        LER cabelo
+        ENQUANTO (cabelo != "l" E cabelo != "c" E cabelo != "p" E cabelo != "r") FAÇA
+            ESCREVER "Cor dos cabelos inválida"
+            LER cabelo
+        FIM_ENQUANTO
+
+        ESCREVER "Salário:"
+        LER salario
+        ENQUANTO (salario < 0) FAÇA
+            ESCREVER "Salário inválido"
+            LER salario
+        FIM_ENQUANTO
+
+        total ← total + 1
+
+        SE (sexo == "f" E idade >= 18 E idade <= 35 E olhos == "c" E cabelo == "c") ENTÃO
+            qtd ← qtd + 1
+        FIM_SE
+    FIM_SE
+
+    ESCREVER "Idade (-1 para encerrar):"
+    LER idade
+FIM_ENQUANTO
+
+SE (total > 0) ENTÃO
+    percentual ← (qtd / total) * 100
+    ESCREVER "Percentual: ", percentual, "%"
+SENÃO
+    ESCREVER "Nenhum habitante cadastrado"
+FIM_SE
+FIM

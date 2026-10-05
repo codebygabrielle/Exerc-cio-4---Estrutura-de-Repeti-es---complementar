@@ -1,0 +1,155 @@
+INÍCIO
+aM ← 0
+aV ← 0
+aN ← 0
+bM ← 0
+bV ← 0
+bN ← 0
+cM ← 0
+cV ← 0
+cN ← 0
+i ← 1
+
+ENQUANTO (i <= 50) FAÇA
+    ESCREVER "Morador ", i, " - Elevador (A/B/C):"
+    LER elev
+    ENQUANTO (elev != "A" E elev != "B" E elev != "C") FAÇA
+        ESCREVER "Elevador inválido"
+        LER elev
+    FIM_ENQUANTO
+
+    ESCREVER "Período (M/V/N):"
+    LER per
+    ENQUANTO (per != "M" E per != "V" E per != "N") FAÇA
+        ESCREVER "Período inválido"
+        LER per
+    FIM_ENQUANTO
+
+    SE (elev == "A" E per == "M") ENTÃO
+        aM ← aM + 1
+    SENÃO_SE (elev == "A" E per == "V") ENTÃO
+        aV ← aV + 1
+    SENÃO_SE (elev == "A" E per == "N") ENTÃO
+        aN ← aN + 1
+    SENÃO_SE (elev == "B" E per == "M") ENTÃO
+        bM ← bM + 1
+    SENÃO_SE (elev == "B" E per == "V") ENTÃO
+        bV ← bV + 1
+    SENÃO_SE (elev == "B" E per == "N") ENTÃO
+        bN ← bN + 1
+    SENÃO_SE (elev == "C" E per == "M") ENTÃO
+        cM ← cM + 1
+    SENÃO_SE (elev == "C" E per == "V") ENTÃO
+        cV ← cV + 1
+    SENÃO
+        cN ← cN + 1
+    FIM_SE
+
+    i ← i + 1
+FIM_ENQUANTO
+
+// Totais por período e por elevador
+tM ← aM + bM + cM
+tV ← aV + bV + cV
+tN ← aN + bN + cN
+tA ← aM + aV + aN
+tB ← bM + bV + bN
+tC ← cM + cV + cN
+
+// Período mais usado e menos usado
+maiorP ← tM
+nomeP ← "Matutino"
+menorP ← tM
+SE (tV > maiorP) ENTÃO
+    maiorP ← tV
+    nomeP ← "Vespertino"
+FIM_SE
+SE (tN > maiorP) ENTÃO
+    maiorP ← tN
+    nomeP ← "Noturno"
+FIM_SE
+SE (tV < menorP) ENTÃO
+    menorP ← tV
+FIM_SE
+SE (tN < menorP) ENTÃO
+    menorP ← tN
+FIM_SE
+
+// a) Elevador que mais é usado dentro do período mais usado
+SE (nomeP == "Matutino") ENTÃO
+    x ← aM
+    y ← bM
+    z ← cM
+SENÃO_SE (nomeP == "Vespertino") ENTÃO
+    x ← aV
+    y ← bV
+    z ← cV
+SENÃO
+    x ← aN
+    y ← bN
+    z ← cN
+FIM_SE
+elevPer ← "A"
+m ← x
+SE (y > m) ENTÃO
+    m ← y
+    elevPer ← "B"
+FIM_SE
+SE (z > m) ENTÃO
+    m ← z
+    elevPer ← "C"
+FIM_SE
+ESCREVER "Período mais usado: ", nomeP, " | Elevador: ", elevPer
+
+// b) Elevador mais frequentado e seu período de maior fluxo
+maiorE ← tA
+nomeE ← "A"
+menorE ← tA
+SE (tB > maiorE) ENTÃO
+    maiorE ← tB
+    nomeE ← "B"
+FIM_SE
+SE (tC > maiorE) ENTÃO
+    maiorE ← tC
+    nomeE ← "C"
+FIM_SE
+SE (tB < menorE) ENTÃO
+    menorE ← tB
+FIM_SE
+SE (tC < menorE) ENTÃO
+    menorE ← tC
+FIM_SE
+
+SE (nomeE == "A") ENTÃO
+    x ← aM
+    y ← aV
+    z ← aN
+SENÃO_SE (nomeE == "B") ENTÃO
+    x ← bM
+    y ← bV
+    z ← bN
+SENÃO
+    x ← cM
+    y ← cV
+    z ← cN
+FIM_SE
+periodoE ← "Matutino"
+m ← x
+SE (y > m) ENTÃO
+    m ← y
+    periodoE ← "Vespertino"
+FIM_SE
+SE (z > m) ENTÃO
+    m ← z
+    periodoE ← "Noturno"
+FIM_SE
+ESCREVER "Elevador mais frequentado: ", nomeE, " | Período de maior fluxo: ", periodoE
+
+// c) Diferença percentual entre o horário mais e o menos usado
+difPerc ← ((maiorP - menorP) / 50) * 100
+ESCREVER "Diferença percentual entre horários: ", difPerc, "%"
+
+// d) Percentual do elevador de média utilização
+percMedio ← ((50 - maiorE - menorE) / 50) * 100
+ESCREVER "Percentual do elevador de média utilização: ", percMedio, "%"
+FIM

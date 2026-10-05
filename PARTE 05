@@ -1,0 +1,22 @@
+INÍCIO
+ESCREVER "Informe n (maior ou igual a 0):"
+LER n
+
+ENQUANTO (n < 0) FAÇA
+    ESCREVER "Valor inválido, informe n >= 0:"
+    LER n
+FIM_ENQUANTO
+
+a ← 0
+b ← 1
+i ← 1
+
+ENQUANTO (i <= n) FAÇA
+    prox ← a + b
+    a ← b
+    b ← prox
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "O termo de ordem ", n, " é: ", a
+FIM

@@ -1,0 +1,147 @@
+INÍCIO
+jog[1] ← "Sam Kerr - Austrália"
+jog[2] ← "Alex Morgan - Estados Unidos"
+jog[3] ← "Dzsenifer Marozsan - Alemanha"
+jog[4] ← "Amandine Henry - França"
+jog[5] ← "Marta Vieira - Brasil"
+
+i ← 1
+ENQUANTO (i <= 5) FAÇA
+    votos[i] ← 0
+    i ← i + 1
+FIM_ENQUANTO
+
+total ← 0
+continuar ← "S"
+
+ENQUANTO (total < 300 E continuar == "S") FAÇA
+    total ← total + 1
+
+    ESCREVER "Nome do entrevistado:"
+    LER nome[total]
+
+    ESCREVER "Idade (maior que 12):"
+    LER idade[total]
+    ENQUANTO (idade[total] <= 12) FAÇA
+        ESCREVER "Idade inválida, informe uma idade maior que 12:"
+        LER idade[total]
+    FIM_ENQUANTO
+
+    ESCREVER "Sexo (M/F):"
+    LER sexo[total]
+    ENQUANTO (sexo[total] != "M" E sexo[total] != "m" E sexo[total] != "F" E sexo[total] != "f") FAÇA
+        ESCREVER "Sexo inválido, informe M ou F:"
+        LER sexo[total]
+    FIM_ENQUANTO
+    SE (sexo[total] == "m") ENTÃO
+        sexo[total] ← "M"
+    FIM_SE
+    SE (sexo[total] == "f") ENTÃO
+        sexo[total] ← "F"
+    FIM_SE
+
+    ESCREVER "1 - Sam Kerr | 2 - Alex Morgan | 3 - Dzsenifer Marozsan | 4 - Amandine Henry | 5 - Marta Vieira"
+    ESCREVER "Seu voto (1 a 5):"
+    LER voto[total]
+    ENQUANTO (voto[total] < 1 OU voto[total] > 5) FAÇA
+        ESCREVER "Voto inválido, informe de 1 a 5:"
+        LER voto[total]
+    FIM_ENQUANTO
+
+    votos[voto[total]] ← votos[voto[total]] + 1
+
+    // Só pode encerrar a partir de 50 entrevistados
+    SE (total >= 50 E total < 300) ENTÃO
+        ESCREVER "Deseja continuar a pesquisa? (S/N)"
+        LER continuar
+        SE (continuar == "s") ENTÃO
+            continuar ← "S"
+        FIM_SE
+    FIM_SE
+FIM_ENQUANTO
+
+// Relatório 1: votos de cada jogadora
+ESCREVER "===== VOTOS POR JOGADORA ====="
+i ← 1
+ENQUANTO (i <= 5) FAÇA
+    ESCREVER jog[i], ": ", votos[i], " voto(s)"
+    i ← i + 1
+FIM_ENQUANTO
+
+// Relatório 2: jogadora(s) mais votada(s), com tratamento de empate
+maior ← votos[1]
+i ← 2
+ENQUANTO (i <= 5) FAÇA
+    SE (votos[i] > maior) ENTÃO
+        maior ← votos[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "===== JOGADORA(S) MAIS VOTADA(S) ====="
+i ← 1
+ENQUANTO (i <= 5) FAÇA
+    SE (votos[i] == maior) ENTÃO
+        ESCREVER jog[i], " com ", maior, " voto(s)"
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+// Relatório 3: participantes separados por sexo e maioridade
+ESCREVER "===== MASCULINO - MAIORES DE IDADE ====="
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (sexo[i] == "M" E idade[i] >= 18) ENTÃO
+        ESCREVER nome[i], " - ", idade[i], " anos - ", sexo[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "===== MASCULINO - MENORES DE IDADE ====="
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (sexo[i] == "M" E idade[i] < 18) ENTÃO
+        ESCREVER nome[i], " - ", idade[i], " anos - ", sexo[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "===== FEMININO - MAIORES DE IDADE ====="
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (sexo[i] == "F" E idade[i] >= 18) ENTÃO
+        ESCREVER nome[i], " - ", idade[i], " anos - ", sexo[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "===== FEMININO - MENORES DE IDADE ====="
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (sexo[i] == "F" E idade[i] < 18) ENTÃO
+        ESCREVER nome[i], " - ", idade[i], " anos - ", sexo[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+// Relatório 4: maiores de idade que votaram na Marta Vieira
+ESCREVER "===== MAIORES DE IDADE QUE VOTARAM NA MARTA VIEIRA ====="
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (voto[i] == 5 E idade[i] >= 18) ENTÃO
+        ESCREVER nome[i]
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+
+// Relatório 5: quantidade de mulheres na pesquisa
+qtdMulheres ← 0
+i ← 1
+ENQUANTO (i <= total) FAÇA
+    SE (sexo[i] == "F") ENTÃO
+        qtdMulheres ← qtdMulheres + 1
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+ESCREVER "Quantidade de mulheres na pesquisa: ", qtdMulheres
+FIM

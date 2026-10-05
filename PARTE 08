@@ -1,0 +1,36 @@
+INÍCIO
+resposta ← "S"
+
+ENQUANTO (resposta == "S") FAÇA
+    ESCREVER "Informe o mês (1 a 12):"
+    LER mes
+    ENQUANTO (mes < 1 OU mes > 12) FAÇA
+        ESCREVER "Mês inválido, informe de 1 a 12:"
+        LER mes
+    FIM_ENQUANTO
+
+    ESCREVER "Informe o ano:"
+    LER ano
+    ENQUANTO (ano <= 0) FAÇA
+        ESCREVER "Ano inválido, informe um ano positivo:"
+        LER ano
+    FIM_ENQUANTO
+
+    SE (mes == 1 OU mes == 3 OU mes == 5 OU mes == 7 OU mes == 8 OU mes == 10 OU mes == 12) ENTÃO
+        dias ← 31
+    SENÃO_SE (mes == 4 OU mes == 6 OU mes == 9 OU mes == 11) ENTÃO
+        dias ← 30
+    SENÃO
+        SE ((ano MOD 4 == 0 E ano MOD 100 != 0) OU ano MOD 400 == 0) ENTÃO
+            dias ← 29
+        SENÃO
+            dias ← 28
+        FIM_SE
+    FIM_SE
+
+    ESCREVER "O mês ", mes, "/", ano, " possui ", dias, " dias"
+
+    ESCREVER "VOCÊ DESEJA OUTRAS ENTRADAS (S/?)?"
+    LER resposta
+FIM_ENQUANTO
+FIM

@@ -1,0 +1,67 @@
+INÍCIO
+qtdH ← 0
+qtdM ← 0
+somaAltH ← 0
+somaAltM ← 0
+somaPesoH ← 0
+somaPesoM ← 0
+i ← 1
+
+ENQUANTO (i <= 10) FAÇA
+    ESCREVER "Nome da pessoa ", i, ":"
+    LER nome
+
+    ESCREVER "Sexo (M/F):"
+    LER sexo
+    ENQUANTO (sexo != "M" E sexo != "m" E sexo != "F" E sexo != "f") FAÇA
+        ESCREVER "Sexo inválido, informe M ou F:"
+        LER sexo
+    FIM_ENQUANTO
+
+    ESCREVER "Altura (em metros):"
+    LER altura
+    ENQUANTO (altura <= 0) FAÇA
+        ESCREVER "Altura inválida:"
+        LER altura
+    FIM_ENQUANTO
+
+    ESCREVER "Peso (em kg):"
+    LER peso
+    ENQUANTO (peso <= 0) FAÇA
+        ESCREVER "Peso inválido:"
+        LER peso
+    FIM_ENQUANTO
+
+    SE (sexo == "M" OU sexo == "m") ENTÃO
+        qtdH ← qtdH + 1
+        somaAltH ← somaAltH + altura
+        somaPesoH ← somaPesoH + peso
+    SENÃO
+        qtdM ← qtdM + 1
+        somaAltM ← somaAltM + altura
+        somaPesoM ← somaPesoM + peso
+    FIM_SE
+
+    i ← i + 1
+FIM_ENQUANTO
+
+ESCREVER "Número de homens: ", qtdH
+ESCREVER "Número de mulheres: ", qtdM
+
+SE (qtdH > 0) ENTÃO
+    ESCREVER "Altura média dos homens: ", somaAltH / qtdH
+    ESCREVER "Peso médio dos homens: ", somaPesoH / qtdH
+SENÃO
+    ESCREVER "Não há homens no grupo"
+FIM_SE
+
+SE (qtdM > 0) ENTÃO
+    ESCREVER "Altura média das mulheres: ", somaAltM / qtdM
+    ESCREVER "Peso médio das mulheres: ", somaPesoM / qtdM
+SENÃO
+    ESCREVER "Não há mulheres no grupo"
+FIM_SE
+
+ESCREVER "Altura média do grupo: ", (somaAltH + somaAltM) / 10
+ESCREVER "Peso médio do grupo: ", (somaPesoH + somaPesoM) / 10
+FIM

@@ -1,0 +1,32 @@
+INÍCIO
+total ← 0
+
+ESCREVER "1 - ABACAXI (R$ 5,00) | 2 - MAÇÃ (R$ 1,00) | 3 - PERA (R$ 4,00) | 0 - Finalizar"
+LER opcao
+
+ENQUANTO (opcao != 0) FAÇA
+    SE (opcao == 1 OU opcao == 2 OU opcao == 3) ENTÃO
+        ESCREVER "Quantidade:"
+        LER qtd
+        ENQUANTO (qtd <= 0) FAÇA
+            ESCREVER "Quantidade inválida"
+            LER qtd
+        FIM_ENQUANTO
+
+        SE (opcao == 1) ENTÃO
+            total ← total + (qtd * 5)
+        SENÃO_SE (opcao == 2) ENTÃO
+            total ← total + (qtd * 1)
+        SENÃO
+            total ← total + (qtd * 4)
+        FIM_SE
+    SENÃO
+        ESCREVER "Opção inválida"
+    FIM_SE
+
+    ESCREVER "1 - ABACAXI (R$ 5,00) | 2 - MAÇÃ (R$ 1,00) | 3 - PERA (R$ 4,00) | 0 - Finalizar"
+    LER opcao
+FIM_ENQUANTO
+
+ESCREVER "Valor total da compra: R$ ", total
+FIM

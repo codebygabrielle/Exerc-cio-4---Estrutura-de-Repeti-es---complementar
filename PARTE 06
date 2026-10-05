@@ -1,0 +1,25 @@
+INÍCIO
+ESCREVER "Informe um número positivo:"
+LER n
+
+ENQUANTO (n <= 0) FAÇA
+    ESCREVER "Valor inválido, informe um número positivo:"
+    LER n
+FIM_ENQUANTO
+
+ESCREVER "Os divisores do número ", n, " são:"
+i ← 1
+
+ENQUANTO (i <= n) FAÇA
+    SE (n MOD i == 0) ENTÃO
+        SE (i == n E n > 1) ENTÃO
+            ESCREVER "e ", i
+        SENÃO_SE (i == n) ENTÃO
+            ESCREVER i
+        SENÃO
+            ESCREVER i, ", "
+        FIM_SE
+    FIM_SE
+    i ← i + 1
+FIM_ENQUANTO
+FIM
